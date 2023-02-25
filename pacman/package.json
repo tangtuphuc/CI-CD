@@ -1,0 +1,10 @@
+{
+  "name": "my-html-app",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
