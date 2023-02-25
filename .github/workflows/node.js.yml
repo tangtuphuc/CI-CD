@@ -17,7 +17,6 @@ jobs:
         ruby-version: '2.7'
     - name: Install dependencies
       run: |
-        gem install bundler
         bundle install
     - name: Test HTML and CSS
       run: |
