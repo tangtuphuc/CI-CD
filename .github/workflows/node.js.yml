@@ -1,35 +1,25 @@
-# Define the pipeline
-name: Node.js HTML Build
+name: HTML and CSS Test
+
 on:
   push:
-    branches:
-      - main # build on the main branch
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-      - name: Install dependencies
-        run: npm install
-      - name: Build HTML
-        run: npm run build --prefix /tangtuphuc/CI-CD/pacman/package.json
-      - name: Archive HTML
-        uses: actions/upload-artifact@v2
-        with:
-          name: html
-          path: /tangtuphuc/CI-CD/pacman/index.html
-      - name: Test HTML
-        uses: donaldwasserman/html-validate-action@v1
-        with:
-          directory: .
-
-      - name: Test CSS
-        uses: jakejarvis/stylelint-github-actions@master
-        with:
-          directory: .
-          config: .stylelintrc.json
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Test HTML and CSS
+      run: |
+        bundle exec jekyll build
+        bundle exec htmlproofer ./tangtuphuc/CI-CD/pacman/index.html --disable-external --check-html --check-opengraph --check-sri --check-favicon --empty-alt-ignore --url-ignore "/^\/assets\//"
