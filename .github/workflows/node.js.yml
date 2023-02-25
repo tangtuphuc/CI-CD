@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: html
-          path: index.html
+          path: /tangtuphuc/CI-CD/pacman/index.html
       - name: Test HTML
         uses: donaldwasserman/html-validate-action@v1
         with:
