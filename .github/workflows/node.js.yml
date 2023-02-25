@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build HTML
-        run: npm run build
+        run: npm run build --prefix /tangtuphuc/CI-CD/pacman/package.json
       - name: Archive HTML
         uses: actions/upload-artifact@v2
         with:
