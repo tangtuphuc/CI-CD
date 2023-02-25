@@ -23,3 +23,13 @@ jobs:
         with:
           name: html
           path: index.html
+      - name: Test HTML
+        uses: donaldwasserman/html-validate-action@v1
+        with:
+          directory: .
+
+      - name: Test CSS
+        uses: jakejarvis/stylelint-github-actions@master
+        with:
+          directory: .
+          config: .stylelintrc.json
